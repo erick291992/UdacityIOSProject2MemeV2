@@ -20,12 +20,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBOutlet weak var shareButton: UIBarButtonItem!
     
+    let memeDelegate = memeTextFieldDelegate()
     var memes = [Meme]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //share button disabled in begining of app
         shareButton.enabled = false
+        
+        topTextField.delegate = memeDelegate
+        bottomTextField.delegate = memeDelegate
         
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
@@ -41,6 +45,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         topTextField.textAlignment = NSTextAlignment.Center
         bottomTextField.textAlignment = NSTextAlignment.Center
+        
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -77,11 +82,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         activityController.completionWithItemsHandler = { activity, success, items, error in
             if error == nil {
-                print("error")
+                print("no error")
                 if success{
                     self.save(image)
                     print("saved image")
                     activityController.dismissViewControllerAnimated(true, completion: nil)
+                    self.shareButton.enabled = false
+                    self.imagePickerView.image = nil
                 }
             }
         }
@@ -117,8 +124,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     func unsubscribeToKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
@@ -152,6 +159,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     //disable status bar
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    //allow for touching ouside of textfield to dissmiss
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
     

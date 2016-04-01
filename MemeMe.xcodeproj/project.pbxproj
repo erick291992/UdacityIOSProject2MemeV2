@@ -13,6 +13,7 @@
 		CDC597081CAC6A8500238022 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDC597071CAC6A8500238022 /* Assets.xcassets */; };
 		CDC5970B1CAC6A8500238022 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC597091CAC6A8500238022 /* LaunchScreen.storyboard */; };
 		CDC597131CACB58200238022 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC597121CACB58200238022 /* Meme.swift */; };
+		CDC597171CAE42ED00238022 /* memeTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC597161CAE42ED00238022 /* memeTextFieldDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CDC5970A1CAC6A8500238022 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDC5970C1CAC6A8500238022 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDC597121CACB58200238022 /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
+		CDC597161CAE42ED00238022 /* memeTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = memeTextFieldDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +58,9 @@
 		CDC596FF1CAC6A8500238022 /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
+				CDC597151CAE426000238022 /* Delegate */,
+				CDC597141CAE422700238022 /* Controller */,
 				CDC597001CAC6A8500238022 /* AppDelegate.swift */,
-				CDC597021CAC6A8500238022 /* MemeEditorViewController.swift */,
 				CDC597041CAC6A8500238022 /* Main.storyboard */,
 				CDC597071CAC6A8500238022 /* Assets.xcassets */,
 				CDC597091CAC6A8500238022 /* LaunchScreen.storyboard */,
@@ -65,6 +68,22 @@
 				CDC597121CACB58200238022 /* Meme.swift */,
 			);
 			path = MemeMe;
+			sourceTree = "<group>";
+		};
+		CDC597141CAE422700238022 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CDC597021CAC6A8500238022 /* MemeEditorViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		CDC597151CAE426000238022 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				CDC597161CAE42ED00238022 /* memeTextFieldDelegate.swift */,
+			);
+			name = Delegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,7 +118,6 @@
 				TargetAttributes = {
 					CDC596FC1CAC6A8500238022 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 8R3688592C;
 					};
 				};
 			};
@@ -141,6 +159,7 @@
 			files = (
 				CDC597131CACB58200238022 /* Meme.swift in Sources */,
 				CDC597031CAC6A8500238022 /* MemeEditorViewController.swift in Sources */,
+				CDC597171CAE42ED00238022 /* memeTextFieldDelegate.swift in Sources */,
 				CDC597011CAC6A8500238022 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,11 +275,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MemeMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appsathome.MemeMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -268,11 +290,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MemeMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appsathome.MemeMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
