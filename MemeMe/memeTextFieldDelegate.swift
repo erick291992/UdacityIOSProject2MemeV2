@@ -15,4 +15,9 @@ class memeTextFieldDelegate: NSObject, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if textField.text == "TOP" || textField.text == "BOTTOM"{
+            textField.text = ""
+        }
+    }
 }

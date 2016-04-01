@@ -19,8 +19,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     let memeDelegate = memeTextFieldDelegate()
+    //should be saved in internal memory
     var memes = [Meme]()
     
     override func viewDidLoad() {
@@ -94,6 +96,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
         self.presentViewController(activityController, animated: true, completion: nil)
     }
+    
+    @IBAction func cancelImage(sender: AnyObject) {
+        imagePickerView.image = nil
+        shareButton.enabled = false
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+        for value in memes{
+            print("oooo")
+            print(value.topText)
+        }
+    }
+    
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
