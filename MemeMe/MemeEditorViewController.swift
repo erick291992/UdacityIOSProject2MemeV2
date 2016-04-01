@@ -51,13 +51,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
 
     override func viewWillAppear(animated: Bool) {
-        print("viewWillAppear")
         super.viewWillAppear(animated)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         self.subscribeToKeyboardNotifications()
     }
     override func viewWillDisappear(animated: Bool) {
-        print("viewWillDisappear")
         super.viewWillDisappear(animated)
         self.unsubscribeToKeyboardNotifications()
     }
@@ -89,8 +87,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                     self.save(image)
                     print("saved image")
                     activityController.dismissViewControllerAnimated(true, completion: nil)
-                    self.shareButton.enabled = false
-                    self.imagePickerView.image = nil
+                    self.setMemeDefault()
                 }
             }
         }
@@ -98,14 +95,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func cancelImage(sender: AnyObject) {
-        imagePickerView.image = nil
-        shareButton.enabled = false
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
-        for value in memes{
-            print("oooo")
-            print(value.topText)
-        }
+        self.setMemeDefault()
     }
     
     
@@ -128,7 +118,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     func keyboardWillHide(notification: NSNotification){
         if(bottomTextField.editing && self.view.frame.origin.y != 0.0){
-            self.view.frame.origin.y = 0
+            self.view.frame.origin.y = 0.0
         }
     }
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
@@ -169,16 +159,23 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         return memedImage
     }
+    func setMemeDefault(){
+        imagePickerView.image = nil
+        shareButton.enabled = false
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+    }
     
     //disable status bar
+    //http://stackoverflow.com/questions/18979837/how-to-hide-ios-status-bar
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
     //allow for touching ouside of textfield to dissmiss
+    //http://stackoverflow.com/questions/5306240/iphone-dismiss-keyboard-when-touching-outside-of-uitextfield
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
-
     
 }
 
