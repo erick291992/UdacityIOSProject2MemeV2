@@ -58,6 +58,7 @@
 		CDC596FF1CAC6A8500238022 /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
+				CDC597181CB079FA00238022 /* Model */,
 				CDC597151CAE426000238022 /* Delegate */,
 				CDC597141CAE422700238022 /* Controller */,
 				CDC597001CAC6A8500238022 /* AppDelegate.swift */,
@@ -65,7 +66,6 @@
 				CDC597071CAC6A8500238022 /* Assets.xcassets */,
 				CDC597091CAC6A8500238022 /* LaunchScreen.storyboard */,
 				CDC5970C1CAC6A8500238022 /* Info.plist */,
-				CDC597121CACB58200238022 /* Meme.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -84,6 +84,14 @@
 				CDC597161CAE42ED00238022 /* memeTextFieldDelegate.swift */,
 			);
 			name = Delegate;
+			sourceTree = "<group>";
+		};
+		CDC597181CB079FA00238022 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CDC597121CACB58200238022 /* Meme.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

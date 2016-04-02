@@ -9,6 +9,8 @@
 import UIKit
 
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    // MARK: - Outlets
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var imagePickerView: UIImageView!
 
@@ -25,6 +27,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     //should be saved in internal memory
     var memes = [Meme]()
     
+    //MARK: - Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         //share button disabled in begining of app
@@ -53,27 +56,26 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unsubscribeToKeyboardNotifications()
+        unsubscribeToKeyboardNotifications()
     }
     
-    //IBAtion functions
-
+    // MARK: - Action
     @IBAction func pickAnImageFromAlbum(sender: AnyObject) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(pickerController, animated: true, completion: nil)
+        presentViewController(pickerController, animated: true, completion: nil)
     }
     
     @IBAction func pickAnImageFromCamera(sender: AnyObject) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.sourceType = UIImagePickerControllerSourceType.Camera
-        self.presentViewController(pickerController, animated: true, completion: nil)
+        presentViewController(pickerController, animated: true, completion: nil)
     }
     
     @IBAction func shareImage(sender: AnyObject) {
@@ -91,14 +93,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 }
             }
         }
-        self.presentViewController(activityController, animated: true, completion: nil)
+        presentViewController(activityController, animated: true, completion: nil)
     }
     
     @IBAction func cancelImage(sender: AnyObject) {
-        self.setMemeDefault()
+        setMemeDefault()
     }
-    
-    
+    // MARK: - ImagePicker Functions
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             shareButton.enabled = true
@@ -106,21 +107,23 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    //functions
-    func keyboardWillShow(notification: NSNotification) {
-        if(bottomTextField.editing && self.view.frame.origin.y == 0.0){
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+    // MARK: - Keyboard Functions
+    func keyboardWillShowOrHide(notification: NSNotification) {
+        if bottomTextField.editing{
+            if view.frame.origin.y != 0.0 {
+                view.frame.origin.y = 0.0
+            }
+            else{
+                view.frame.origin.y -= getKeyboardHeight(notification)
+            }
         }
     }
-    func keyboardWillHide(notification: NSNotification){
-        if(bottomTextField.editing && self.view.frame.origin.y != 0.0){
-            self.view.frame.origin.y = 0.0
-        }
-    }
+
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo = notification.userInfo!
         let keyboardSize = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
@@ -128,18 +131,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShowOrHide(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShowOrHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     func unsubscribeToKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
-    
+    // MARK: - Functions
     func save(memeImage:UIImage){
         //Create the meme
         let meme = Meme(topText:topTextField.text!, bottomText: bottomTextField.text, image: imagePickerView.image, memeImage: memeImage)
-        self.memes.append(meme)
+        memes.append(meme)
     }
 
     func generateMemedImage() -> UIImage {
@@ -174,7 +177,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     //allow for touching ouside of textfield to dissmiss
     //http://stackoverflow.com/questions/5306240/iphone-dismiss-keyboard-when-touching-outside-of-uitextfield
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
     
 }
