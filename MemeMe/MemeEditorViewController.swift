@@ -30,8 +30,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     //MARK: - Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        //share button disabled in begining of app
-       setup()
+        setup()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -116,6 +115,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: - Functions
     func setup(){
+        //share button disabled in begining of app
         shareButton.enabled = false
         topTextField.delegate = memeDelegate
         bottomTextField.delegate = memeDelegate
