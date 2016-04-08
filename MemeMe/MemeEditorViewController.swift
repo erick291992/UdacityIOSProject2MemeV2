@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     // MARK: - Outlets
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -25,7 +25,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     let memeDelegate = memeTextFieldDelegate()
     //should be saved in internal memory
-    var memes = [Meme]()
+    //var memes = [Meme]()
     
     //MARK: - Lifecycle Functions
     override func viewDidLoad() {
@@ -63,7 +63,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                     self.save(image)
                     print("saved image")
                     activityController.dismissViewControllerAnimated(true, completion: nil)
-                    self.setMemeDefault()
+                    self.dismissCurrentVC()
                 }
             }
         }
@@ -71,7 +71,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func cancelImage(sender: AnyObject) {
-        setMemeDefault()
+        dismissCurrentVC()
+        
     }
     // MARK: - ImagePicker Functions
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -117,10 +118,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func setup(){
         //share button disabled in begining of app
         shareButton.enabled = false
-        topTextField.delegate = memeDelegate
-        bottomTextField.delegate = memeDelegate
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
+        setupTextField(topTextField, defaultText: "TOP")
+        setupTextField(bottomTextField, defaultText: "BOTTOM")
         
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -134,6 +133,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         topTextField.textAlignment = NSTextAlignment.Center
         bottomTextField.textAlignment = NSTextAlignment.Center
     }
+    
+    func setupTextField(textField: UITextField, defaultText: String) {
+        textField.delegate = memeDelegate
+        textField.text = defaultText
+    }
+    
     func chooseImageSource(sourseType:UIImagePickerControllerSourceType){
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
@@ -144,7 +149,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func save(memeImage:UIImage){
         //Create the meme
         let meme = Meme(topText:topTextField.text!, bottomText: bottomTextField.text, image: imagePickerView.image, memeImage: memeImage)
-        memes.append(meme)
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
     }
 
     func generateMemedImage() -> UIImage {
@@ -164,11 +169,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         return memedImage
     }
-    func setMemeDefault(){
-        imagePickerView.image = nil
-        shareButton.enabled = false
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
+    
+    func dismissCurrentVC(){
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     //disable status bar
