@@ -99,7 +99,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 view.frame.origin.y = 0.0
             }
             else{
-                view.frame.origin.y -= getKeyboardHeight(notification)
+                view.frame.origin.y = getKeyboardHeight(notification) * -1
             }
         }
     }
