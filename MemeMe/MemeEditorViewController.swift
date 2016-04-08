@@ -24,8 +24,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     let memeDelegate = memeTextFieldDelegate()
-    //should be saved in internal memory
-    //var memes = [Meme]()
     
     //MARK: - Lifecycle Functions
     override func viewDidLoad() {

@@ -12,6 +12,6 @@ import Foundation
 
 let IDENTIFIER_CELL_TABLE_MEME = "MemeTableViewCell"
 let IDENTIFIER_CELL_COLLECTION_MEME = "MemeCollectionViewCell"
-let IDENTIFIER_VC_SENT_MEMES = "SentMemesViewController"
+let IDENTIFIER_VC_DETAIL_MEME = "MemeDetailViewController"
 
 

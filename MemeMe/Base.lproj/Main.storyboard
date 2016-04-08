@@ -7,11 +7,11 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--TableVIew-->
         <scene sceneID="yTw-HI-qf6">
             <objects>
                 <navigationController id="FoM-vk-y4i" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="topRated" id="mQC-Z3-I4s"/>
+                    <tabBarItem key="tabBarItem" title="TableVIew" id="mQC-Z3-I4s"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WA7-G8-Zzg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -123,11 +123,11 @@
             </objects>
             <point key="canvasLocation" x="-442" y="-183"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--CollectionView-->
         <scene sceneID="OWI-SG-LBn">
             <objects>
                 <navigationController id="w2q-dk-2Qe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="5nZ-aZ-Xly"/>
+                    <tabBarItem key="tabBarItem" title="CollectionView" id="5nZ-aZ-Xly"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qBr-vb-xgA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -199,10 +199,10 @@
             </objects>
             <point key="canvasLocation" x="-442" y="505"/>
         </scene>
-        <!--Sent Memes View Controller-->
+        <!--Meme Detail View Controller-->
         <scene sceneID="5Vj-4w-iMc">
             <objects>
-                <viewController storyboardIdentifier="SentMemesViewController" id="TdF-pw-1Ta" customClass="SentMemesViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeDetailViewController" id="TdF-pw-1Ta" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Wy-or-QeZ"/>
                         <viewControllerLayoutGuide type="bottom" id="Dy8-lR-sjn"/>

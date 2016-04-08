@@ -22,17 +22,7 @@ class MemeCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-//        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "MemeCollectionViewCell")
-
-        // Do any additional setup after loading the view.
-        //hideTabBar(false)
         adjustCellToOrientation()
-        print("view did load")
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,15 +50,13 @@ class MemeCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(IDENTIFIER_CELL_COLLECTION_MEME, forIndexPath: indexPath) as! MemeCollectionViewCell
         let meme = memes[indexPath.row]
         cell.memeImage.image = meme.memeImage
-        // Configure the cell
-    
         return cell
     }
     
     // MARK: UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let detailViewController = self.storyboard?.instantiateViewControllerWithIdentifier(IDENTIFIER_VC_SENT_MEMES) as! SentMemesViewController
+        let detailViewController = self.storyboard?.instantiateViewControllerWithIdentifier(IDENTIFIER_VC_DETAIL_MEME) as! MemeDetailViewController
         detailViewController.image = memes[indexPath.row].memeImage
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
