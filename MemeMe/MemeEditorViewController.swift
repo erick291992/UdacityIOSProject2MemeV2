@@ -8,7 +8,14 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    /*
+     im not sure what you meant by
+     To answer your question, you can make these two text field variables an instance of the sub class you set up.
+     
+     @IBOutlet weak var topTextField: memeTextFieldDelegate!
+    */
+
     
     // MARK: - Outlets
     @IBOutlet weak var cameraButton: UIBarButtonItem!

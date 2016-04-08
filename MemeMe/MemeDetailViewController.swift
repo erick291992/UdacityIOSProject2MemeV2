@@ -11,7 +11,6 @@ import UIKit
 class MemeDetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
-    var image:UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +25,6 @@ class MemeDetailViewController: UIViewController {
     }
     
     func setup(){
-        self.imageView.image = image
         self.tabBarController?.tabBar.hidden = true
     }
 

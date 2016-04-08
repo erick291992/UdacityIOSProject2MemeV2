@@ -26,6 +26,7 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
     override func viewDidAppear(animated: Bool) {
         hideTabBar(false)
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,7 +58,7 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailViewController = self.storyboard?.instantiateViewControllerWithIdentifier(IDENTIFIER_VC_DETAIL_MEME) as! MemeDetailViewController
-        detailViewController.image = memes[indexPath.row].memeImage!
+        detailViewController.imageView.image = memes[indexPath.row].memeImage!
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 

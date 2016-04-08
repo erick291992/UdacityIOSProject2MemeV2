@@ -16,6 +16,14 @@ class memeTextFieldDelegate: NSObject, UITextFieldDelegate {
         return true
     }
     func textFieldDidBeginEditing(textField: UITextField) {
+        //where do i get topTextField and bottomTextField
+        //they are only in the MemeEditorViewController unless i need to make the outlet in this class
+        /*
+        if textField == topTextField || textField == bottomTextField {
+            textField.text = ""
+        }
+         */
+        
         if textField.text == "TOP" || textField.text == "BOTTOM"{
             textField.text = ""
         }
